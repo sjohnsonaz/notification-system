@@ -33,3 +33,6 @@ webpack.dev.config.js
 # MkDocs files
 mkdocs.yml
 site
+
+# OS X
+.DS_Store
