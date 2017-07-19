@@ -1,0 +1,7 @@
+site_name: Notification System
+site_url: https://sjohnsonaz.github.io/notification-system
+repo_url: https://github.com/sjohnsonaz/notification-system
+copyright: Copyright &copy; 2017 Sean Johnson
+pages:
+    - Home: index.md
+theme: readthedocs
