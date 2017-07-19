@@ -1,6 +1,7 @@
 module.exports = {
     entry: {
         'main': './src/scripts/main.ts',
+        'ServiceWorker': './src/scripts/ServiceWorker.ts',
         'mochaRunner': './src/mocha/BrowserRunner.ts'
     },
     output: {

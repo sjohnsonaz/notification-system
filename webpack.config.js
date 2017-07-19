@@ -2,7 +2,8 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        'main': './src/scripts/main.ts'
+        'main': './src/scripts/main.ts',
+        'ServiceWorker': './src/scripts/ServiceWorker.ts'
     },
     output: {
         filename: './www/bundle/[name].js',
