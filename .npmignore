@@ -8,7 +8,7 @@ docs/
 src/
 
 # Build directory
-dist/bundle/
+www/bundle/
 dist/tests/
 dist/mocha/
 

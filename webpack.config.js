@@ -5,7 +5,7 @@ module.exports = {
         'main': './src/scripts/main.ts'
     },
     output: {
-        filename: './dist/bundle/[name].min.js',
+        filename: './www/bundle/[name].js',
         libraryTarget: 'var',
         library: '[name]'
     },
