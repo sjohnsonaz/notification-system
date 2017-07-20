@@ -79,13 +79,12 @@ export default class App {
     }
 
     subscribeUserToPush(serviceWorkerRegistration: ServiceWorkerRegistration) {
-        const subscribeOptions = {
+        const subscribeOptions: PushSubscriptionOptions = {
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(
                 'BFycNS1Ah5TUoHY-9pHWfsriqqsiyC2ZKcy8eMVkKdG5h2Ayi4Bnd6mgzBI02_Do7aH2HFVBtuNfag_WVaHtXx8'
-            )
+            ) as any
         };
-
         return serviceWorkerRegistration.pushManager.subscribe(subscribeOptions);
     }
 
@@ -96,6 +95,16 @@ export default class App {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(subscription)
+        });
+    }
+
+    pushMessageToBackEnd(message: any) {
+        return fetch('http://localhost:3000/api/trigger-push-msg/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(message)
         });
     }
 };
@@ -121,3 +130,4 @@ export function run() {
 
 let app = new App();
 app.initialize();
+window['app'] = app;
