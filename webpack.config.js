@@ -3,9 +3,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        'main': './src/scripts/main.ts',
+        'main': './src/scripts/main.tsx',
         'ServiceWorker': './src/scripts/ServiceWorker.ts',
-        'styles': './src/styles/style.styl'
+        'style': './src/styles/style.styl'
     },
     output: {
         filename: './www/bundle/[name].js',

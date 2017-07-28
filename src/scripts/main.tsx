@@ -1,5 +1,9 @@
 declare var cordova: any;
 
+import Cascade from 'cascade';
+
+import Layout from './views/Layout';
+
 // Polyfill
 require('es6-promise').polyfill();
 import 'whatwg-fetch';
@@ -21,6 +25,7 @@ export default class App {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady() {
+        Cascade.render(document.getElementById('root'), <Layout />);
         this.receivedEvent('deviceready');
         this.initializePush();
     }
