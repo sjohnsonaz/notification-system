@@ -1,0 +1,7 @@
+{
+    "$default": {
+        "padding": "12px",
+        "border-width": "0",
+        "font-family": "'Roboto', sans-serif"
+    }
+}
