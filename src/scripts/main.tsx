@@ -8,6 +8,8 @@ import Layout from './views/Layout';
 require('es6-promise').polyfill();
 import 'whatwg-fetch';
 
+let address = "http://192.168.1.8:3000";
+
 export default class App {
     // Application Constructor
     initialize() {
@@ -94,7 +96,7 @@ export default class App {
     }
 
     sendSubscriptionToBackEnd(subscription: PushSubscription) {
-        return fetch('http://localhost:3000/api/save-subscription/', {
+        return fetch(address + '/api/save-subscription/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -104,7 +106,7 @@ export default class App {
     }
 
     pushMessageToBackEnd(message: any) {
-        return fetch('http://localhost:3000/api/trigger-push-msg/', {
+        return fetch(address + '/api/trigger-push-msg/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
