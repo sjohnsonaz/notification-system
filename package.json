@@ -22,9 +22,10 @@
         "mkdocs-deploy": "mkdocs gh-deploy"
     },
     "dependencies": {
-        "artistry": "0.0.6",
-        "cascade": "0.1.1",
-        "cascade-components": "0.0.9",
+        "artistry": "0.0.7",
+        "cascade": "0.1.2",
+        "cascade-components": "0.0.10",
+        "cascade-manager": "0.0.4",
         "cordova-browser": "^4.1.0",
         "cordova-plugin-whitelist": "^1.3.2",
         "phonegap-plugin-push": "^1.10.5"
