@@ -1,5 +1,5 @@
-import { IConnection } from 'cascade-manager';
+import { ICrudConnection } from 'cascade-manager';
 
-export interface ISubscriptionConnection extends IConnection {
+export interface ISubscriptionConnection extends ICrudConnection<string, PushSubscription, {}> {
 
 }

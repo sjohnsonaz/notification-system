@@ -1,15 +1,29 @@
-let address = "http://10.42.1.59:3000";
+import Cascade, { observable } from 'cascade';
+
+import { INotificationConnection } from '../../interfaces/connections/INotificationConnection';
+import { ISubscriptionConnection } from '../../interfaces/connections/ISubscriptionConnection';
 
 export default class PushNotification {
-    address: string;
+    notificationConnection: INotificationConnection;
+    subscriptionConnection: ISubscriptionConnection;
+    @observable subscriptionAddress: string;
+    @observable notificationAddress: string;
+    @observable message: string;
 
-    constructor(address: string) {
-        this.address = address;
-    }
+    constructor(
+        notificationConnection: INotificationConnection,
+        subscriptionConnection: ISubscriptionConnection
+    ) {
+        this.notificationConnection = notificationConnection;
+        this.subscriptionConnection = subscriptionConnection;
 
-    // Application Constructor
-    initialize() {
-        this.initializePush();
+        Cascade.subscribe<string>(this, 'subscriptionAddress', (value) => {
+            this.subscriptionConnection.base = value;
+        });
+
+        Cascade.subscribe<string>(this, 'notificationAddress', (value) => {
+            this.notificationConnection.base = value;
+        });
     }
 
     async initializePush() {
@@ -23,15 +37,7 @@ export default class PushNotification {
                 console.log('Service worker successfully registered.');
                 let pushSubscription = await this.subscribeUserToPush(serviceWorkerRegistration);
                 console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
-                let response = await this.sendSubscriptionToBackEnd(pushSubscription);
-                if (!response.ok) {
-                    throw new Error('Bad status code from server.');
-                }
-                let responseData = await response.json();
-                if (!(responseData.data && responseData.data.success)) {
-                    throw new Error('Bad response from server.');
-                }
-                return true;
+                return await this.sendSubscriptionToBackEnd(pushSubscription);
             } catch (e) {
                 console.error('Unable to register service worker.', e);
             }
@@ -64,13 +70,7 @@ export default class PushNotification {
     }
 
     sendSubscriptionToBackEnd(subscription: PushSubscription) {
-        return fetch(address + '/api/save-subscription/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(subscription)
-        });
+        return this.subscriptionConnection.post(subscription);
     }
 };
 
