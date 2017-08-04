@@ -29,19 +29,17 @@ export default class InitializationForm extends Component<IInitializationFormPro
         } = notificationState;
 
         return (
-            <Section title="Initialization">
-                <Form>
-                    <FormContainer title="Subscription Address">
-                        <input type="text" class="input" value={subscriptionAddress} onchange={this.setSubscriptionAddress} />
-                    </FormContainer>
-                    <FormContainer title="Notification Address">
-                        <input type="text" class="input" value={notificationAddress} onchange={this.setNotificationAddress} />
-                    </FormContainer>
-                    <FormActions>
-                        <Button theme="primary" onclick={this.createSubscription}>Send</Button>
-                    </FormActions>
-                </Form>
-            </Section>
+            <Form>
+                <FormContainer title="Subscription Address">
+                    <input type="text" class="input" value={subscriptionAddress} onchange={this.setSubscriptionAddress} />
+                </FormContainer>
+                <FormContainer title="Notification Address">
+                    <input type="text" class="input" value={notificationAddress} onchange={this.setNotificationAddress} />
+                </FormContainer>
+                <FormActions>
+                    <Button theme="primary" onclick={this.createSubscription}>Send</Button>
+                </FormActions>
+            </Form>
         )
     }
 }

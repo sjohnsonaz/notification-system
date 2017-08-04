@@ -1,5 +1,5 @@
 import Cascade, { Component } from 'cascade';
-import { Container, Section, Form, FormActions, FormContainer, Button } from 'cascade-components';
+import { Container, Form, FormActions, FormContainer, Button } from 'cascade-components';
 
 import NotificationState from '../implementations/states/NotificationState';
 
@@ -19,16 +19,14 @@ export default class MessageForm extends Component<IMessageFormProps> {
         } = notificationState;
 
         return (
-            <Section title="Application">
-                <Form>
-                    <FormContainer title="Message">
-                        <input type="text" class="input" value={message} onchange={this.setMessage} />
-                    </FormContainer>
-                    <FormActions>
-                        <Button theme="primary">Send</Button>
-                    </FormActions>
-                </Form>
-            </Section>
+            <Form>
+                <FormContainer title="Message">
+                    <input type="text" class="input" value={message} onchange={this.setMessage} />
+                </FormContainer>
+                <FormActions>
+                    <Button theme="primary">Send</Button>
+                </FormActions>
+            </Form>
         )
     }
 }

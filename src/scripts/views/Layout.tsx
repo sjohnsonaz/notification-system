@@ -31,13 +31,11 @@ export default class Layout extends Component<ILayoutProps> {
 
         return (
             <Container>
-                <div class="app">
-                    <h1>Apache Cordova</h1>
-                    <div id="deviceready" class="blink">
-                        <p class="event listening" style={ready ? 'display: none;' : ''}>Connecting to Device</p>
-                        <p class="event received" style={ready ? 'display: block;' : ''}>Device is Ready</p>
-                    </div>
+                <h1>Notification System</h1>
+                <div>
+                    {ready ? 'Device is Ready' : 'Connecting to Device'}
                 </div>
+                <hr />
                 <Tab
                     titles={[
                         'Initialization',
