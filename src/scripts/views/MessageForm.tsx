@@ -12,6 +12,11 @@ export default class MessageForm extends Component<IMessageFormProps> {
         this.props.notificationState.message = (event.target as HTMLInputElement).value;
     }
 
+    sendMessage = (event: Event) => {
+        event.preventDefault();
+        this.props.notificationState.sendMessage();
+    }
+
     render() {
         let { notificationState } = this.props;
         let {
@@ -24,7 +29,7 @@ export default class MessageForm extends Component<IMessageFormProps> {
                     <input type="text" class="input" value={message} onchange={this.setMessage} />
                 </FormContainer>
                 <FormActions>
-                    <Button theme="primary">Send</Button>
+                    <Button theme="primary" onclick={this.sendMessage}>Send</Button>
                 </FormActions>
             </Form>
         )

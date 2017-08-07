@@ -1,8 +1,8 @@
 import { IConfig } from '../interfaces/data/IConfig';
 
 var config: IConfig = {
-    notificationAddress: "http://10.42.1.59:3001",
-    subscriptionAddress: "http://10.42.1.59:3000"
+    notificationAddress: "http://localhost:3001/",
+    subscriptionAddress: "http://localhost:3000/api/subscription"
 };
 
 export default config;

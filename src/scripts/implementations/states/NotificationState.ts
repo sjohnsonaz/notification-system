@@ -9,6 +9,20 @@ export default class PushNotification {
     @observable subscriptionAddress: string;
     @observable notificationAddress: string;
     @observable message: string;
+    @observable get subscriptionAddressComputed() {
+        let subscriptionAddress = this.subscriptionAddress;
+        Cascade.wrapContext(() => {
+            this.subscriptionConnection.base = subscriptionAddress;
+        });
+        return true;
+    }
+    @observable get notificationAddressComputed() {
+        let notificationAddress = this.notificationAddress;
+        Cascade.wrapContext(() => {
+            this.notificationConnection.base = notificationAddress;
+        });
+        return true;
+    }
 
     constructor(
         notificationConnection: INotificationConnection,
@@ -16,14 +30,6 @@ export default class PushNotification {
     ) {
         this.notificationConnection = notificationConnection;
         this.subscriptionConnection = subscriptionConnection;
-
-        Cascade.subscribe<string>(this, 'subscriptionAddress', (value) => {
-            this.subscriptionConnection.base = value;
-        });
-
-        Cascade.subscribe<string>(this, 'notificationAddress', (value) => {
-            this.notificationConnection.base = value;
-        });
     }
 
     async initializePush() {
@@ -71,6 +77,21 @@ export default class PushNotification {
 
     sendSubscriptionToBackEnd(subscription: PushSubscription) {
         return this.subscriptionConnection.post(subscription);
+    }
+
+    getSubscriptions() {
+        return this.subscriptionConnection.list({});
+    }
+
+    async sendMessage() {
+        let subscriptionsResult = await this.getSubscriptions();
+        let subscriptions = subscriptionsResult.DataList;
+        return await this.notificationConnection.post({
+            notification: {
+                message: this.message
+            },
+            subscriptions: subscriptions
+        });
     }
 };
 

@@ -16,9 +16,11 @@ export default class App {
 
     constructor(config: IConfig) {
         this.notificationState = new NotificationState(
-            new NotificationConnection('/api/'),
-            new SubscriptionConnection('/api/')
+            new NotificationConnection(''),
+            new SubscriptionConnection('')
         );
+        this.notificationState.subscriptionAddressComputed;
+        this.notificationState.notificationAddressComputed;
         this.notificationState.notificationAddress = config.notificationAddress;
         this.notificationState.subscriptionAddress = config.subscriptionAddress;
     }
