@@ -34,6 +34,7 @@
     "devDependencies": {
         "@types/chai": "4.0.1",
         "@types/mocha": "2.2.41",
+        "@types/phonegap-plugin-push": "0.0.32",
         "chai": "4.0.2",
         "css-loader": "^0.28.4",
         "es6-promise": "4.1.1",
