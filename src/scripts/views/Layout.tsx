@@ -11,14 +11,6 @@ export interface ILayoutProps {
 }
 
 export default class Layout extends Component<ILayoutProps> {
-    setSubscriptionAddress = (subscriptionAddress: string) => {
-        this.props.notificationSystem
-    }
-
-    setNotificationAddress = (notificationAddress: string) => {
-
-    }
-
     setIndex = (index: number) => {
         this.props.notificationSystem.index = index;
     }
