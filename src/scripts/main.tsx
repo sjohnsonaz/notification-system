@@ -1,4 +1,5 @@
 declare var cordova: any;
+declare var FirebasePlugin: any;
 
 import config from './config/config';
 
@@ -14,34 +15,30 @@ window['app'] = app;
 window.onload = function () {
     if (typeof cordova !== 'undefined') {
         document.addEventListener('deviceready', function initialize() {
-            let push = PushNotification.init({
-                android: {
-                    senderID: '77088182555'
-                },
-                ios: {
-                    sound: true,
-                    vibration: true,
-                    badge: true
-                },
-                windows: {
-
-                }
-            });
-            push.on('registration', function (data) {
-                console.log('registration event: ' + data.registrationId);
-                var oldRegId = localStorage.getItem('registrationId');
-                if (oldRegId !== data.registrationId) {
-                    localStorage.setItem('registrationId', data.registrationId);
-                }
-            });
-
-            push.on('error', function (e) {
-                console.log('push error : ' + e.message);
-            });
-            app['push'] = push;
+            initializePushPlugin();
             app.initialize();
         }, false);
     } else {
         app.initialize();
     }
 };
+
+function initializePushPlugin() {
+    FirebasePlugin.getToken(function (token) {
+        // save this server-side and use it to push notifications to this device
+        console.log(token);
+    }, function (error) {
+        console.error(error);
+    });
+    FirebasePlugin.onTokenRefresh(function (token) {
+        // save this server-side and use it to push notifications to this device
+        console.log(token);
+    }, function (error) {
+        console.error(error);
+    });
+    FirebasePlugin.onNotificationOpen(function (notification) {
+        console.log(notification);
+    }, function (error) {
+        console.error(error);
+    });
+}
